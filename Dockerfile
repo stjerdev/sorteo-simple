@@ -10,7 +10,6 @@ COPY . ./
 RUN npm run build
 
 # production environment
-FROM nginx:stable-alpine
-COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 80
+FROM centos/nginx-116-centos8
+COPY --from=build /app/build /opt/app-root/src
 CMD ["nginx", "-g", "daemon off;"]
